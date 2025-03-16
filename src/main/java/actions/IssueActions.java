@@ -13,5 +13,8 @@ public class IssueActions extends BaseActions {
 
     public void openNewIssuePage() {
         issuePage.newIssueButton().click();
+        if(!issuePage.template().isEmpty()) {
+            issuePage.template().getFirst().click();
+        }
     }
 }
