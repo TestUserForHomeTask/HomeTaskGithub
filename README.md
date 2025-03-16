@@ -5,7 +5,7 @@
 
 ## Local Run
 Test run is parallelized by classes
-To run tests:
+To run tests locally use the following command:
 mvn clean test -Ddriver=chrome -DheadlessMode=false -Dsecret=B9CE98F04918610A1F114CA398C22B62 -DsuitePath=sanitySuite
 
 ## Environment data:

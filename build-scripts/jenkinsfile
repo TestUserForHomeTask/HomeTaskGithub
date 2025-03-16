@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+
+    environment {
+        JAVA_HOME = '/usr/lib/jvm/22'
+    }
+
+    options {
+        disableConcurrentBuilds()
+    }
+
+    parameters {
+            gitParameter branch: '', branchFilter: '.*', defaultValue: 'main', name: 'BRANCH', quickFilterEnabled: false,
+                         selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*', type: 'PT_BRANCH'
+            choice choices: ['sanitySuite', 'smokeSuite', 'regressionSuite'],
+                   description: 'Select the suite name from the Dropdown List',
+                   name: 'SUITE'
+            choice choices: ['chrome'], description: 'Choose browser to use', name: 'BROWSER'
+    }
+
+    stages {
+        stage('Run Tests') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'qa-encryption-key', usernameVariable: 'UNUSED', passwordVariable: 'SECRET')]) {
+                        sh "mvn clean test -Ddriver=${params.BROWSER} -Dsecret=${SECRET} -DsuitePath=${params.SUITE}"
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                //prepare allure report
+            }
+            emailext(
+                //email configuration
+            )
+        }
+    }
+}
