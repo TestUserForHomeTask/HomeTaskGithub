@@ -11,7 +11,7 @@ public class DriverFactory {
     private static final Logger logger = LoggerFactory.getLogger(DriverFactory.class);
 
     public static void setupWebDriver() {
-        String driverType = System.getProperty("driver.type");
+        String driverType = System.getProperty("driver");
         if (driverType.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             driver.set(new ChromeDriver());
