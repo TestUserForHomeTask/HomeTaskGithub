@@ -1,6 +1,7 @@
 ## Environment Details
 - Java Version: 22
-- TestNG: Ensure TestNG is installed.
+- TestNG
+- Maven
 - Lombok: Ensure Lombok extension is installed.
 
 ## Local Run
